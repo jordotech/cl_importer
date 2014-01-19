@@ -43,7 +43,7 @@ Remove a job.
   );
   JobScheduler::get('example_unpublish')->remove($job);
 
-Optionally jobs can declared together with a schedule in a hook_cron_job_scheduler_info().
+Optionally jobs can be declared together with a schedule in a hook_cron_job_scheduler_info().
 
   function example_cron_job_scheduler_info() {
     $schedulers = array();

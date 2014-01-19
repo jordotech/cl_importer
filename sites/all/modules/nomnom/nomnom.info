@@ -1,0 +1,4 @@
+name = NOMNOM
+description = "NOMNOM"
+package = Other
+core = 7.x

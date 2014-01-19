@@ -1,0 +1,29 @@
+<?php
+
+function nomnom($node, $src_url_field, $pic_field) {
+    include_once('./simplehtmldom_1_5/simple_html_dom.php');
+    $url = $node->{$src_url_field}['und'][0]['value'];
+    $html = file_get_html($url);
+    foreach ($html->find('img') as $element) {
+        if (strstr($element->src, '50x50c')) {
+            $src = str_replace('50x50c', '600x450', $element->src);
+        } else {
+            $src = $element->src;
+        }
+
+        $filename = basename($src);
+        $image = file_get_contents($src);
+        $file = file_save_data($image, 'public://' . $filename, FILE_EXISTS_RENAME);
+        $images[] = (array) $file;
+    }
+    $node->{$pic_field} = array(
+        LANGUAGE_NONE => $images,
+    );
+    variable_set('jarjar', $node);
+
+    node_save($node);
+}
+
+function nomnom_init(){
+   // dpm(node_load(39));
+}
